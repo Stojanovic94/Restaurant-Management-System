@@ -1,0 +1,43 @@
+@startuml UseCaseDiagram
+left to right direction
+
+actor Konobar
+actor Kuvar
+actor Administrator
+actor Gost
+
+rectangle Sistem {
+    usecase "Unos narudžbina" as UC1
+    usecase "Pregled stolova" as UC2
+    usecase "Izdavanje računa" as UC3
+    usecase "Pregled narudžbina" as UC4
+    usecase "Upravljanje jelovnikom" as UC5
+    usecase "Dodela smena" as UC6
+    usecase "Dodavanje bonusa" as UC7
+    usecase "Umanjivanje plate" as UC8
+    usecase "Zapošljavanje radnika" as UC9
+    usecase "Otpuštanje radnika" as UC10
+    usecase "Upravljanje stolovima" as UC11
+    usecase "Naručivanje jela/pića" as UC12
+    usecase "Prijem računa" as UC13
+    usecase "Upisivanje u knjigu utisaka" as UC14
+}
+
+Konobar --> UC1
+Konobar --> UC2
+Konobar --> UC3
+
+Kuvar --> UC4
+
+Administrator --> UC5
+Administrator --> UC6
+Administrator --> UC7
+Administrator --> UC8
+Administrator --> UC9
+Administrator --> UC10
+Administrator --> UC11
+
+Gost --> UC12
+Gost --> UC13
+Gost --> UC14
+@enduml

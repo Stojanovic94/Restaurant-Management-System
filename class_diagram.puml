@@ -1,0 +1,97 @@
+@startuml RestaurantClassDiagram
+
+' Glavna klasa Restoran
+class Restoran {
+    - naziv_restorana : String
+    - lista_stolova : List<Sto>
+    - lista_osoblja : List<Osoblje>
+    + dodajSto() : void
+    + dodajOsoblje() : void
+    + generišiIzveštaj() : String
+}
+
+' Klasa Sto
+class Sto {
+    - broj_stola : int
+    - status : String
+    + promeniStatus(novi_status : String) : void
+}
+
+' Klasa Narudžbina
+class Narudžbina {
+    - broj_narudžbine : int
+    - lista_jela : List<Jelo>
+    - ukupna_cena : double
+    + dodajJelo(jelo : Jelo) : void
+    + izračunajCenu() : double
+    + završiNarudžbinu() : void
+}
+
+' Klasa Jelo
+class Jelo {
+    - naziv : String
+    - cena : double
+    + prikažiDetalje() : String
+}
+
+' Klasa Račun
+class Račun {
+    - broj_računa : int
+    - ukupan_iznos : double
+    - datum : Date
+    + generišiRačun() : void
+}
+
+' Apstraktna klasa Osoblje
+abstract class Osoblje {
+    - ime : String
+    - pozicija : String
+    - plata : double
+    - smena : String
+    + prikažiDetalje() : String
+    + dodajBonus(iznos : double) : void
+    + umanjiPlatu(iznos : double) : void
+    + postaviSmenu(smena : String) : void
+}
+
+' Izvedene klase iz Osoblje
+class Konobar {
+    - lista_narudžbina : List<Narudžbina>
+    + dodajNarudžbinu(narudžbina : Narudžbina) : void
+}
+
+class Kuvar {
+    - lista_priprema : List<Narudžbina>
+    + pripremiNarudžbinu(narudžbina : Narudžbina) : void
+}
+
+class Administrator {
+    - lista_zaposlenih : List<Osoblje>
+    + dodajZaposlenog(osoblje : Osoblje) : void
+    + otpustiZaposlenog(osoblje : Osoblje) : void
+    + dodeliSmenu(osoblje : Osoblje, smena : String) : void
+    + dodajBonus(osoblje : Osoblje, iznos : double) : void
+    + umanjiPlatu(osoblje : Osoblje, iznos : double) : void
+}
+
+' Klasa Gost
+class Gost {
+    - ime_gosta : String
+    - broj_stola : int
+    - narudžbina : Narudžbina
+    - račun : Račun
+    + napraviNarudžbinu(lista_jela : List<Jelo>) : Narudžbina
+    + platiRacun() : void
+    + oceniUslugu(ocena : int) : void
+}
+
+' Veze između klasa
+Restoran "1" -- "0..*" Sto : agregacija
+Sto "1" *-- "0..1" Narudžbina : kompozicija
+Narudžbina "1" -- "0..*" Jelo : agregacija
+Narudžbina "1" -- "1" Račun : povezanost
+Osoblje <|-- Konobar
+Osoblje <|-- Kuvar
+Osoblje <|-- Administrator
+
+@enduml
